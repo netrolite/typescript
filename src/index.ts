@@ -1,38 +1,44 @@
-interface Vehicle {
-  type: "car" | "boat" | "plane",
-  getType?: Function,
-  license?: {
-    madeAt: Date,
-    expiresAt: Date,
-    getLicense?: Function
-  }
+enum JobStatusEnum {
+  Pending = 1,
+  Rejected,
+  Interview,
+  Accepted
 }
 
-interface Person {
-  name?: string | number,
-  vehicles: Vehicle[]
+interface Company {
+  name: string,
+  location: string,
+  employeesAmount: number,
+  phoneNumber?: string,
+  website?: string
 }
 
-const bobsCar: Vehicle = {
-  type: "plane",
-  getType() {
-    return this.type;
-  },
-  license: {
-    getLicense() {
-      return this.expiresAt;
-    },
-    madeAt: new Date("Feb 19, 1992"),
-    expiresAt: new Date("Feb 18, 1992")
-  }
+type JobStatus = "pending" | "rejected" | "interview" | "accepted";
+
+interface Job {
+  position: string,
+  company: Company,
+  status: JobStatus | JobStatusEnum
 }
 
-const bob: Person = {
-  name: "",
-  vehicles: [bobsCar]
+const google: Company = {
+  name: "Google",
+  location: "Silicon Valley",
+  employeesAmount: 100
 }
 
-const expiresAt = bob.vehicles[0]?.license?.getLicense?.() ?? "unknown";
-const type = bob.vehicles[0]?.getType?.() ?? "type is not defined";
-console.log(expiresAt);
-console.log(type);
+const engineer: Job = {
+  position: "back-end developer",
+  status: "pending",
+  company: google
+}
+
+const designer: Job = {
+  position: "lead designer",
+  status: JobStatusEnum.Rejected,
+  company: google
+}
+
+console.log(JobStatusEnum);
+console.log(engineer);
+console.log(designer);
