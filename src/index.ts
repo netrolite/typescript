@@ -1,31 +1,7 @@
-const tuple: [string, boolean, number] = ["hi", false, 22];
+type mathFn = (a: number, b: number) => number;
 
-type Id = string | number;
-
-interface Vehicle {
-  type: "car" | "boat" | "plane" | "helicopter",
-  license: string
+const sum: mathFn = (a, b) => {
+  return a + b;
 }
 
-interface Person {
-  name: string,
-  hobbies: string[],
-  yearBorn: number,
-  id: Id,
-  vehicles: Vehicle[]
-}
-
-const bob: Person = {
-  name: "Bob",
-  yearBorn: 1997,
-  hobbies: ["golf"],
-  id: 111,
-  vehicles: [
-    {
-      type: "helicopter",
-      license: "1111"
-    }
-  ]
-}
-
-console.log(bob);
+console.log(sum(3, 5));
