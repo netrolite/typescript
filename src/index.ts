@@ -1,17 +1,31 @@
-enum Grade {
-  A,
-  B,
-  C,
-  D,
-  F
+const tuple: [string, boolean, number] = ["hi", false, 22];
+
+type Id = string | number;
+
+interface Vehicle {
+  type: "car" | "boat" | "plane" | "helicopter",
+  license: string
 }
 
-function greet(name: string): string {
-  return `Hello, ${name}`;
+interface Person {
+  name: string,
+  hobbies: string[],
+  yearBorn: number,
+  id: Id,
+  vehicles: Vehicle[]
 }
 
-console.log(Grade);
-console.log(greet("matvey"));
-console.log(greet(3));
+const bob: Person = {
+  name: "Bob",
+  yearBorn: 1997,
+  hobbies: ["golf"],
+  id: 111,
+  vehicles: [
+    {
+      type: "helicopter",
+      license: "1111"
+    }
+  ]
+}
 
-
+console.log(bob);
