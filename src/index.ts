@@ -1,7 +1,5 @@
-type mathFn = (a: number, b: number) => number;
-
-const sum: mathFn = (a, b) => {
-  return a + b;
+function sum(a: number, b: number, c: number = 5) {
+  return a + b + c;
 }
 
-console.log(sum(3, 5));
+console.log(sum(1, 2, 13));
