@@ -1,8 +1,14 @@
-// rest parameters
-function total(a: number, nums: number[], b: number) {
-  console.log(a);
-  console.log(b);
-  return nums.reduce((acc, curr) => acc + curr, 0);
+// "never" return type
+// both functions have an inferred "never" return type
+// however, if I use the "function" keyword to declare them, the return type becomes "void"
+
+const throwErr = (errMsg: string) => {
+  throw new Error(errMsg);
 }
 
-console.log(total(1, [5, 4, 4], 3))
+const infinite = () => {
+  let i: number = 1;
+  while (true) {
+    i++
+  }
+}
