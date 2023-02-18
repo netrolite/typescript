@@ -1,14 +1,11 @@
-// "never" return type
-// both functions have an inferred "never" return type
-// however, if I use the "function" keyword to declare them, the return type becomes "void"
+function numOrStr(val: number | string | object): string {
+  if (typeof val === "number") return "number";
+  if (typeof val === "string") return "string";
+  return throwErr("This should not happen");
+}
 
-const throwErr = (errMsg: string) => {
+function throwErr(errMsg: string): never {
   throw new Error(errMsg);
 }
 
-const infinite = () => {
-  let i: number = 1;
-  while (true) {
-    i++
-  }
-}
+numOrStr([]);
