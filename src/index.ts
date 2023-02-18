@@ -1,6 +1,8 @@
 // rest parameters
-function total(...nums: number[]) {
-  console.log(nums);
+function total(a: number, nums: number[], b: number) {
+  console.log(a);
+  console.log(b);
+  return nums.reduce((acc, curr) => acc + curr, 0);
 }
 
-total(1, 5, 4, 4)
+console.log(total(1, [5, 4, 4], 3))
