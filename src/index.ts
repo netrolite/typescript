@@ -1,11 +1,12 @@
-function numOrStr(val: number | string | object): string {
-  if (typeof val === "number") return "number";
-  if (typeof val === "string") return "string";
-  return throwErr("This should not happen");
+// custom type guard
+function isArray(val: any): boolean {
+  return Array.isArray(val);
 }
 
-function throwErr(errMsg: string): never {
-  throw new Error(errMsg);
+function checkToSeeIfValIsArray(val: any): string {
+  // using a custom type guard
+  if (isArray(val)) return "yes, it is indeed an array";
+  return "no, it is not an array";
 }
 
-numOrStr([]);
+console.log(checkToSeeIfValIsArray(3));
