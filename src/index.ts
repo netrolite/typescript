@@ -1,55 +1,25 @@
-interface ICar {
-  make: string,
-  isConvertible: boolean,
-  horsepower: number,
-  license: License
-  drive(speedMph: number): string
-}
+class Person {
+  private static count = 0;
+  public id: number;
 
-interface License {
-  registeredAt: Date,
-  expiresAt: Date
-}
-
-class Car implements ICar {
-  make: string;
-  isConvertible: boolean;
-  horsepower: number;
-  license: {
-    registeredAt: Date,
-    expiresAt: Date
+  constructor(public name: string) {
+    Person.count += 1;
+    this.id = Person.count;
+    this.name = name;
   }
 
-  constructor(
-    make: string,
-    isConvertible: boolean,
-    horsepower: number,
-    license: {
-      registeredAt: Date,
-      expiresAt: Date
-    }
-  ) {
-    this.make = make;
-    this.isConvertible = isConvertible;
-    this.horsepower = horsepower;
-    this.license = license;
-  }
-
-  drive(speedMph: number): string {
-    if (speedMph > 60) return "Too fast! Not complying with request."
-    return `Driving at ${speedMph}MPH.`
+  static getCount() {
+    return Person.count;
   }
 }
 
-const now = new Date();
-const oneYearInMillisec = 1000 * 60 * 1440 * 365;
-const oneYearFromNow = new Date(now.getTime() + oneYearInMillisec);
+const person1 = new Person("matvey");
+const person2 = new Person("bob");
+const person3 = new Person("rob");
+console.log(person3);
 
-const license: License = {
-  registeredAt: now,
-  expiresAt: oneYearFromNow
+for (let i = 0; i < 1000; i++) {
+  const person = new Person("Bill");
 }
-const car = new Car("BMW", false, 200, license);
 
-console.log(car);
-console.log(car.drive(61))
+console.log(Person.getCount());
