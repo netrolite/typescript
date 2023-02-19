@@ -1,42 +1,36 @@
-class Person {
-  secondLang!: string;
-
-  // private can only be accessed from this class
-  // protected can be accessed from derived (extended) classes
+class Coder {
   constructor(
-    private readonly name: string,
-    private musicPref: string,
-    private age: number,
-    private lang: string = "Typescript"
+    public readonly firstName: string,
+    public readonly lastName: string,
+    private address: string,
+    protected age: number,
+    public langs: string[] = ["JavaScript", "Java"]
   ) {
-    this.name = name;
-    this.musicPref = musicPref;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.address = address;
     this.age = age;
-    this.lang = lang;
+    this.langs = langs;
   }
 
-  public getName = () => this.name;
-
-  public getMusicPref = () => this.musicPref;
-  public setMusicPref = (musicPref: string) => this.musicPref = musicPref;
-
+  public getAddress = () => this.address;
   public getAge = () => this.age;
-  public setAge = (age: number) => this.age = age
-
-  public getLang = () => this.lang;
-
-  public setLang(lang: string) {
-    this.lang = lang;
-  }
-
-  public greet() {
-    console.log(this.getGreetMsg(this.name));
-  }
-
-  private getGreetMsg(name: string) {
-    return `Hello, my name is ${name}`
-  }
 }
 
-const bob = new Person("Bob", "jazz", 16, "Australian english");
-bob.getAge()
+class WebDev extends Coder {
+  constructor(
+    firstName: string,
+    lastName: string,
+    address: string,
+    age: number,
+    public computer: string
+  ) {
+    super(firstName, lastName, address, age);
+    this.computer = computer;
+  }
+
+  public getLangs = () => this.langs;
+}
+
+const rob = new WebDev("rob", "banks", "main st", 11, "Mac mini");
+console.log(rob.getLangs());
