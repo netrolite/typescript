@@ -1,7 +1,9 @@
-const name: any = "hello";
+type One = string;
+type Two = "you";
+type Three = "hello";
 
-const lengthWithAs = (name as string).length;
-const lengthWithAngleBrackets = (<string>name).length;
-console.log(lengthWithAs);
-console.log(lengthWithAngleBrackets);
-console.log(lengthWithAs === lengthWithAngleBrackets);
+// typescript knows about the type but doesn't perform any checks
+// so the following does not throw any errors:
+const a: One = "hi";
+const b = a as Two;
+const c = <Three>a;
