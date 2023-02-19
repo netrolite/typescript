@@ -3,7 +3,7 @@ class Person {
     public readonly firstName: string,
     public readonly lastName: string,
     private age: number,
-    protected hasFridge: boolean
+    protected hasFridge: boolean = false
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -38,20 +38,35 @@ class Developer extends Person {
     firstName: string,
     lastName: string,
     age: number,
-    hasFridge: boolean = true,
     public languages: string[] = [],
   ) {
-    super(firstName, lastName, age, hasFridge);
+    super(firstName, lastName, age);
     this.languages = languages;
   }
 
   public doSomething(rangeStart: number, rangeEnd: number) {
     return this.getRandomIntInRange(rangeStart, rangeEnd);
   }
+
+  public getLanguages() {
+    return `I write code in ${this.getFormattedStringOfLangs()}`;
+  }
+
+  public setLanguages(languages: Array<string>) {
+    this.languages = languages;
+  }
+
+  private getFormattedStringOfLangs() {
+    const allLangs = [...this.languages];
+    if (allLangs.length === 1) return `${allLangs[0]}`
+
+    const lastLang = allLangs.pop();
+    let langsString = allLangs.join(", ");
+    return langsString += ` and ${lastLang}`;
+  }
 }
 
-const dev = new Developer("john", "doe", 19, false, []);
+const dev = new Developer("john", "doe", 19);
+dev.setLanguages(["Java", "JavaScript", "C++", "Rust", "Go", "TypeScript"]);
 
-for (let i = 0; i < 20; i++) {
-  console.log(dev.doSomething(0, 5));
-}
+console.log(dev.getLanguages());
