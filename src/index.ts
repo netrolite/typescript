@@ -1,36 +1,38 @@
-class Coder {
+class Person {
   constructor(
     public readonly firstName: string,
     public readonly lastName: string,
-    private address: string,
-    protected age: number,
-    public langs: string[] = ["JavaScript", "Java"]
+    private age: number,
+    protected hasFridge: boolean
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.address = address;
     this.age = age;
-    this.langs = langs;
+    this.hasFridge = hasFridge;
   }
 
-  public getAddress = () => this.address;
   public getAge = () => this.age;
+  public setAge(age: number) {
+    this.age = age;
+  }
+
+  public getHasFridge = () => this.hasFridge;
+  public setHasFridge(hasFridge: boolean) {
+    this.hasFridge = hasFridge;
+  }
 }
 
-class WebDev extends Coder {
+class Developer extends Person {
   constructor(
     firstName: string,
     lastName: string,
-    address: string,
     age: number,
-    public computer: string
+    hasFridge: boolean = true,
+    public languages: string[] = [],
   ) {
-    super(firstName, lastName, address, age);
-    this.computer = computer;
+    super(firstName, lastName, age, hasFridge);
+    this.languages = languages;
   }
-
-  public getLangs = () => this.langs;
 }
 
-const rob = new WebDev("rob", "banks", "main st", 11, "Mac mini");
-console.log(rob.getLangs());
+const dev = new Developer("john", "doe", 19, false, []);
