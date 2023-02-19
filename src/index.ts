@@ -1,25 +1,21 @@
-class Person {
-  private static count = 0;
-  public id: number;
+class Invoice {
+  constructor(
+    public client: string,
+    public details: string,
+    public amount: number
+  ) {}
 
-  constructor(public name: string) {
-    Person.count += 1;
-    this.id = Person.count;
-    this.name = name;
-  }
-
-  static getCount() {
-    return Person.count;
+  format() {
+    return `${this.client} is charged $${this.amount} for ${this.details}`
   }
 }
 
-const person1 = new Person("matvey");
-const person2 = new Person("bob");
-const person3 = new Person("rob");
-console.log(person3);
+const invoices: Invoice[] = [];
 
-for (let i = 0; i < 1000; i++) {
-  const person = new Person("Bill");
+invoices.push(new Invoice("Bob", "washing", 120));
+invoices.push(new Invoice("Rob", "writing code", 400));
+console.log(invoices);
+
+for (const invoice of invoices) {
+  console.log(invoice.format());
 }
-
-console.log(Person.getCount());
