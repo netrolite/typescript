@@ -43,7 +43,7 @@ class Developer extends Person {
     super(firstName, lastName, age);
     this.languages = languages;
   }
-
+  
   public doSomething(rangeStart: number, rangeEnd: number) {
     return this.getRandomIntInRange(rangeStart, rangeEnd);
   }
@@ -66,7 +66,11 @@ class Developer extends Person {
   }
 }
 
-const dev = new Developer("john", "doe", 19);
-dev.setLanguages(["Java", "JavaScript", "C++", "Rust", "Go", "TypeScript"]);
+const person1 = new Person("Rob", "Banks", 2);
+// illegal: console.log(person1.age);
 
-console.log(dev.getLanguages());
+const dev1 = new Developer("Bob", "Zanks", 22);
+// all properties are derived from superclass to subclass (public, private, protected...)
+// private variable derived from parent class:
+// illegal: console.log(dev1.age);
+// ok using an accessor: dev.getAge()
