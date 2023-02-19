@@ -1,76 +1,55 @@
-class Person {
+interface ICar {
+  make: string,
+  isConvertible: boolean,
+  horsepower: number,
+  license: License
+  drive(speedMph: number): string
+}
+
+interface License {
+  registeredAt: Date,
+  expiresAt: Date
+}
+
+class Car implements ICar {
+  make: string;
+  isConvertible: boolean;
+  horsepower: number;
+  license: {
+    registeredAt: Date,
+    expiresAt: Date
+  }
+
   constructor(
-    public readonly firstName: string,
-    public readonly lastName: string,
-    private age: number,
-    protected hasFridge: boolean = false
+    make: string,
+    isConvertible: boolean,
+    horsepower: number,
+    license: {
+      registeredAt: Date,
+      expiresAt: Date
+    }
   ) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
-    this.hasFridge = hasFridge;
+    this.make = make;
+    this.isConvertible = isConvertible;
+    this.horsepower = horsepower;
+    this.license = license;
   }
 
-  public getAge() {
-    return this.age;
-  }
-
-  public incrementAge() {
-    this.age += 1;
-  }
-
-
-  public getHasFridge() {
-    return this.hasFridge;
-  }
-
-  public setHasFridge(hasFridge: boolean) {
-    this.hasFridge = hasFridge;
-  }
-
-  protected getRandomIntInRange(rangeStart: number, rangeEnd: number) {
-    return Math.floor(Math.random() * (rangeEnd - rangeStart + 1)) + rangeStart;
+  drive(speedMph: number): string {
+    if (speedMph > 60) return "Too fast! Not complying with request."
+    return `Driving at ${speedMph}MPH.`
   }
 }
 
-class Developer extends Person {
-  constructor(
-    firstName: string,
-    lastName: string,
-    age: number,
-    public languages: string[] = [],
-  ) {
-    super(firstName, lastName, age);
-    this.languages = languages;
-  }
-  
-  public doSomething(rangeStart: number, rangeEnd: number) {
-    return this.getRandomIntInRange(rangeStart, rangeEnd);
-  }
+const now = new Date();
+const oneYearInMillisec = 1000 * 60 * 1440 * 365;
+const oneYearFromNow = new Date(now.getTime() + oneYearInMillisec);
 
-  public getLanguages() {
-    return `I write code in ${this.getFormattedStringOfLangs()}`;
-  }
-
-  public setLanguages(languages: Array<string>) {
-    this.languages = languages;
-  }
-
-  private getFormattedStringOfLangs() {
-    const allLangs = [...this.languages];
-    if (allLangs.length === 1) return `${allLangs[0]}`
-
-    const lastLang = allLangs.pop();
-    let langsString = allLangs.join(", ");
-    return langsString += ` and ${lastLang}`;
-  }
+const license: License = {
+  registeredAt: now,
+  expiresAt: oneYearFromNow
 }
+const car = new Car("BMW", false, 200, license);
 
-const person1 = new Person("Rob", "Banks", 2);
-// illegal: console.log(person1.age);
-
-const dev1 = new Developer("Bob", "Zanks", 22);
-// all properties are derived from superclass to subclass (public, private, protected...)
-// private variable derived from parent class:
-// illegal: console.log(dev1.age);
-// ok using an accessor: dev.getAge()
+console.log(car);
+console.log(car.drive(61))
