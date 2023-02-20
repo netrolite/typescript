@@ -1,18 +1,8 @@
-function makeTuple<T, Y>(x: T, y: Y): [T, Y] {
-  return [x, y];
+function addId<T extends object>(obj: T) {
+  const id = Math.floor(Math.random() * 1000);
+  return { ...obj, id };
 }
 
-function makeArr<T>(...x: T[]): T[] {
-  return x;
-}
-
-const arr = makeArr("t", "t", "t");
-const arr2 = makeArr(1, 2, 3, 4);
-console.log(arr);
-console.log(arr2);
-
-const tuple1 = makeTuple("3", 2);
-const tuple2 = makeTuple(true, {});
-console.log(tuple1);
-console.log(tuple2);
-// tuple1[2] = 22; // won't work
+const obj = { name: "matvey", age: 15 };
+const objWithId = addId(obj);
+console.log(objWithId);
