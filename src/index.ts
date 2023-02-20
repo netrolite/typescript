@@ -1,61 +1,29 @@
-// Pizza, Books, Job are required, but it's possible to add more "[string]: number" key-value pairs
-interface Transaction {
-  [key: string]: number;
-  Pizza: number;
-  Books: number;
-  Job: number;
+interface Student {
+  name: string,
+  gpa: number,
+  classes?: number[]
 }
 
-type SignatureValues = string | number | boolean | Date;
-// isConvertible, horsepower, registeredAt are required, and adding other values is forbidden
-// only useful if the object needs to be looped over using a for in loop
-// if it doesn't, can just remove the index signature entirely and get the same exact behavior
-interface Car {
-  readonly [key: string]: SignatureValues;
-  isConvertible: boolean;
-  horsepower: number;
-  regisetredAt: Date;
+const student: Student = {
+  name: "douglas",
+  gpa: 3.3,
+  classes: [100, 300]
 }
 
-// legs and isAlive are required, but it's possible to add more key-value pairs where key is a string and value is one of the types in SignatureValues
-interface Horse {
-  [key: string]: SignatureValues;
-  legs: number;
-  isAlive: boolean;
+for (const key in student) {
+  // "keyof Student" works if we have access to Student interface
+  console.log(`${key}: ${student[key as keyof Student]}`);
 }
 
-interface Test {
-  key1: number;
-  key2: string;
-  key3: number;
+Object.keys(student).forEach((key) => {
+  // "keyof typeof student" works if we don't have access to Student interface
+  console.log(`${key}: ${student[key as keyof typeof student]}`);
+})
+
+// "keyof Interface" returns all types of values that the interface contains
+// function test(key: keyof Student) === function test(key: string | number | number[] | undefined) 
+function logStudentKey(student: Student, key: keyof Student) {
+  console.log(student[key]);
 }
 
-const todaysTransactions: Transaction = {
-  Pizza: -50,
-  Books: -5,
-  Job: 500
-}
-
-const test: Test = {
-  key1: 2,
-  key2: "hi",
-  key3: 4
-}
-
-const horse: Horse = {
-  legs: 4,
-  isAlive: true
-}
-
-// ok
-for (const key in horse) {
-  console.log(horse[key]);
-}
-
-// expression of type "string" can't be used to index type "Test"
-// no index signature with a parameter type "string" was found on type "Test"
-/*
-  for (const key in test) {
-    console.log(test[key]);
-  }
-*/
+logStudentKey(student, "classes");
