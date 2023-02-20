@@ -1,12 +1,10 @@
-type IncomeStreams = "salary" | "bonus" | "business" | "side hustle";
+type IncomeStreams = "salary" | "business" | "bonus" | "robbery";
+type NumOrStr = number | string;
+type Income = Record<IncomeStreams, NumOrStr>;
 
-// error: index signature parameter type cannot be a literal type or generic type
-/*
-  type Income = {
-    [key: IncomeStreams]: number
-  }
-*/
-
-// no errors
-// creates Income type that can have IncomeStreams as keys and numbers as values
-type Income = Record<IncomeStreams, number>;
+const income: Income = {
+  robbery: 100,
+  salary: 200,
+  business: 600,
+  bonus: "negative fifty"
+}
