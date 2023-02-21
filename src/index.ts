@@ -1,13 +1,30 @@
-interface Tab<T> {
-  id: string,
-  position: number,
-  data: T
+interface Car<T> {
+  horsepower: number,
+  isConvertible: boolean,
+  fuelType: T
 }
 
-type NumberTab = Tab<number>;
-type stringTab = Tab<string>;
-type booleanTab = Tab<boolean>;
-type objectTab = Tab<object>;
-type numberArrTab = Tab<Array<number>>;
-type stringArrTab = Tab<Array<string>>;
-type booleanArrTab = Tab<Array<boolean>>;
+// fuelType: string
+type CarStringFuel = Car<string>;
+// fuelType: number
+type CarNumberFuel = Car<number>;
+
+const car: CarNumberFuel = {
+  horsepower: 100,
+  isConvertible: true,
+  fuelType: 10
+}
+
+// fuelType: string
+const car2: Car<string> = {
+  horsepower: 300,
+  isConvertible: false,
+  fuelType: "diesel"
+}
+
+// fuelType: number
+const car3: Car<number> = {
+  horsepower: 150,
+  isConvertible: true,
+  fuelType: 12
+}
