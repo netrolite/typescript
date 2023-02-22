@@ -1,16 +1,7 @@
-function log(val: unknown) {
-  if (typeof val === "number") {
-    console.log(val.toFixed(2));
-  } else if (typeof val === "string") {
-    if (isUpperCase(val)) console.log(val.toLowerCase());
-    else console.log(val.toUpperCase())
-  } else {
-    console.log(val);
-  }
+function pluck<Data, Key extends keyof Data>(data: Data, key: Key) {
+  return data[key];
 }
 
-function isUpperCase(s: string) {
-  return s === s.toUpperCase();
-}
-
-log("HELLO");
+const obj = { firstName: "bob", lastName: "robs" };
+console.log(pluck(obj, "firstName"));
+console.log(pluck(obj, "lastName"));
