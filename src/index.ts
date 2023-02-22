@@ -1,7 +1,20 @@
-function pluck<Data, Key extends keyof Data>(data: Data, key: Key) {
-  return data[key];
+interface BaseEvent {
+  time: number,
+  user: string
 }
 
-const obj = { firstName: "bob", lastName: "robs" };
-console.log(pluck(obj, "firstName"));
-console.log(pluck(obj, "lastName"));
+interface EventMap {
+  addToCart: BaseEvent & { quantity: number, sku: string };
+  checkout: BaseEvent
+}
+
+function sendEvent<Name extends keyof EventMap>(
+  name: Name,
+  data: EventMap[Name]
+) {
+  console.log(name);
+  console.log(data);
+}
+
+// not ideal, quantity and sku properties are not required
+sendEvent("checkout", { time: 100, user: "xyz123" });
