@@ -1,6 +1,15 @@
-function makeArr<X, Y = any>(x: X, y: Y): [X, Y] {
-  return [x, y];
-}
+let x: any;
+let y: unknown;
 
-// second type argument is optional. Defaults to any as per function definition
-const v = makeArr<string>("d", 4);
+// no errrors, typescirpt not checking anything
+// x.trim();
+
+// error: Object is of type "unknown".
+// y.trim();
+
+// have to check the type before using any type-specific methods like .trim()
+if (typeof y === "string") {
+  console.log(y.trim());
+} else if (typeof y === "number") {
+  console.log(y.toFixed(2));
+}
