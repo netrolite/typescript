@@ -1,20 +1,29 @@
-interface BaseEvent {
-  time: number,
-  user: string
-}
-
-interface EventMap {
-  addToCart: BaseEvent & { quantity: number, sku: string };
-  checkout: BaseEvent
-}
-
-function sendEvent<Name extends keyof EventMap>(
-  name: Name,
-  data: EventMap[Name]
+function getDeepValue<
+  Obj,
+  FirstKey extends keyof Obj,
+  SecondKey extends keyof Obj[FirstKey],
+  ThirdKey extends keyof Obj[FirstKey][SecondKey]
+>(
+  obj: Obj,
+  firstKey: FirstKey,
+  secondKey: SecondKey,
+  thirdKey: ThirdKey
 ) {
-  console.log(name);
-  console.log(data);
+  console.log(obj[firstKey][secondKey][thirdKey]);
 }
 
-// not ideal, quantity and sku properties are not required
-sendEvent("checkout", { time: 100, user: "xyz123" });
+const obj = {
+  a: {
+    deepA: 12,
+    deepB: "hello"
+  },
+  b: {
+    deepC: false,
+    deepD: {
+      name: "John",
+      amount: 30
+    }
+  }
+}
+
+const x = getDeepValue(obj, "b", "deepD", "amount");
