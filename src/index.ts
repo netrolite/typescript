@@ -26,7 +26,15 @@ const ass: Assignment = {
 type MyPick<T, K extends keyof T> = {
   [P in K]: T[P]
 }
-type AssignmentResult = MyPick<Assignment, "title" | "passingScore">;
+
+type AssignmentResult = Pick<Assignment, "title" | "passingScore">;
+type AssignmentPreview = Omit<Assignment, "title" | "passingScore">;
+
+const assPreview: AssignmentPreview = {
+  maxScore: 200,
+  description: "some long description",
+  studentId: 243
+}
 
 const assResult: AssignmentResult = {
   title: "This is the title of the assignment",
