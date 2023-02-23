@@ -1,42 +1,26 @@
-type Grade = "A" | "B" | "C" | "D" | "F";
-type Students = "John" | "Joe" | "Bob" | "Rob";
-type FinalGrades = Partial<Record<Students, Grade>>;
-
-const finalGrades: FinalGrades = {
-  Joe: "D"
-}
-
-// Pick<T> and Omit<T>
 interface Assignment {
   title: string,
-  description: string,
+  details?: string,
   studentId: number,
   maxScore: number,
-  passingScore: number
+  passingScore: number,
+  score?: number
 }
 
-const ass: Assignment = {
-  title: "do this",
-  description: "sample",
-  studentId: 10,
-  maxScore: 100,
-  passingScore: 30
+type AssignmentAllPropsRequired = Required<Assignment>;
+type AssignmentPreview = Omit<Assignment, "maxScore" | "passingScore">;
+// type AssignmentResults = Pick<AssignmentAllPropsRequired, "title" | "passingScore" | "score">;
+type AssignmentResults = Required<Pick<Assignment, "title" | "passingScore" | "score">>;
+
+const asgmt1: Assignment = {
+  title: "write an article on child labor",
+  studentId: 120,
+  maxScore: 10,
+  passingScore: 3  
 }
 
-type MyPick<T, K extends keyof T> = {
-  [P in K]: T[P]
-}
-
-type AssignmentResult = Pick<Assignment, "title" | "passingScore">;
-type AssignmentPreview = Omit<Assignment, "title" | "passingScore">;
-
-const assPreview: AssignmentPreview = {
-  maxScore: 200,
-  description: "some long description",
-  studentId: 243
-}
-
-const assResult: AssignmentResult = {
-  title: "This is the title of the assignment",
-  passingScore: 25
+const results: AssignmentResults = {
+  title: "Your article on child labor",
+  passingScore: 3,
+  score: 2
 }
