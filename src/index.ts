@@ -1,24 +1,39 @@
 interface Assignment {
-  studentId: number,
+  studentId: string,
   title: string,
-  description?: string,
   grade: number,
-  verified?: boolean
+  verified?: boolean,
+  description?: string
 }
 
-function updateAssignment(
-  assignment: Assignment,
-  propsToUpdate: Partial<Assignment>
-) {
-  return { ...assignment, ...propsToUpdate }
+const updateAssignment = (assign: Assignment, propsToUpdate: Partial<Assignment>): Assignment => {
+  return { ...assign, ...propsToUpdate }
 }
 
-let ass: Assignment = {
-  studentId: 10,
-  title: "Jump 10 times",
-  grade: 100,
+const assign1: Assignment = {
+  studentId: "compsci123",
+  title: "Final Project",
+  grade: 0,
 }
 
-console.log(ass);
-ass = updateAssignment(ass, { description: "Each jump must be at least 1 inch high", verified: true });
-console.log(ass);
+console.log(updateAssignment(assign1, { grade: 95 }))
+const assignGraded: Assignment = updateAssignment(assign1, { grade: 95 })
+
+
+// Required and Readonly 
+
+const recordAssignment = (assign: Required<Assignment>): Assignment => {
+  // send to database, etc. 
+  return assign
+}
+
+// have to specify that the type is Required<Assignment>. If I don't, it would throw an error
+// saying that properties "verified" and "description" are possibly undefined and thus are not
+// assignable to type Required<Assignment>, where all properties are required.
+const assignVerified: Required<Assignment> = {
+  ...assignGraded,
+  verified: true,
+  description: "sample desc"
+};
+
+recordAssignment(assignVerified);
