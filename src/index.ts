@@ -15,3 +15,7 @@ type AssignmentResults = Required<Pick<Assignment, "title" | "passingScore" | "s
 type Grade = "A" | "B" | "C" | "D" | "F";
 type UnsatisfactoryGrade = Extract<Grade, "F">;
 type SatisfactoryGrade = Exclude<Grade, "F">;
+type HighGrade = Extract<Grade, "A" | "B">;
+
+type Student = "John" | null | "Dave" | undefined;
+type StudentNoNullOrUndefiend = NonNullable<Student>;
