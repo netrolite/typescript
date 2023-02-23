@@ -1,39 +1,22 @@
-interface Assignment {
-  studentId: string,
-  title: string,
-  grade: number,
-  verified?: boolean,
-  description?: string
+// Record utility type
+
+// Syntax: Record<keyType: valueType>
+
+const hexColorMap: Record<string, string> = {
+  red: "FF0000",
+  green: "00FF00",
+  blue: "0000FF"
 }
 
-const updateAssignment = (assign: Assignment, propsToUpdate: Partial<Assignment>): Assignment => {
-  return { ...assign, ...propsToUpdate }
+const incomeStreams: Record<string, number> = {
+  salary: 10000,
+  freelance: 8000,
+  "side hustle": 6000
 }
 
-const assign1: Assignment = {
-  studentId: "compsci123",
-  title: "Final Project",
-  grade: 0,
+const things: Record<number, unknown> = {
+  0: true,
+  1: "hello",
+  2: ["this", "is", "my", "real", "array"],
+  3: { this: "is", my: "object" }
 }
-
-console.log(updateAssignment(assign1, { grade: 95 }))
-const assignGraded: Assignment = updateAssignment(assign1, { grade: 95 })
-
-
-// Required and Readonly 
-
-const recordAssignment = (assign: Required<Assignment>): Assignment => {
-  // send to database, etc. 
-  return assign
-}
-
-// have to specify that the type is Required<Assignment>. If I don't, it would throw an error
-// saying that properties "verified" and "description" are possibly undefined and thus are not
-// assignable to type Required<Assignment>, where all properties are required.
-const assignVerified: Required<Assignment> = {
-  ...assignGraded,
-  verified: true,
-  description: "sample desc"
-};
-
-recordAssignment(assignVerified);
