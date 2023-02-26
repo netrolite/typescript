@@ -14,7 +14,6 @@ export default class ListItem {
   get id() {
     return this._id
   }
-  
   set id(val: string) {
     this._id = val
   }
@@ -22,7 +21,6 @@ export default class ListItem {
   get description() {
     return this._description
   }
-  
   set description(val: string) {
     this._description = val
   }
@@ -30,7 +28,6 @@ export default class ListItem {
   get checked() {
     return this._checked
   }
-  
   set checked(val: boolean) {
     this._checked = val
   }
