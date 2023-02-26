@@ -30,6 +30,7 @@ async function fetchUsers(): Promise<User[]> {
 // Awaited<typeof fetchUsers>; would return Promise<Users[]> because typeof fetchUsers gives you the entire function including its arguments like `(id: number) => Promise<Student>`. And Awaited<T> converts this to just the return type, which is `Promise<Student>`. To avoid that, you should use Awaited<ReturnType<typeof test>> to make sure that you're passing only the return type of `test` (which is Promise<Student>) to Awaited<T>, which would give you type `Student`.
 type UsersAwaited = Awaited<ReturnType<typeof fetchUsers>>;
 
+// every object should be typed as an interface and everything else should be a type!
 (async () => {
   const usersPromise = fetchUsers(); // Promise<User[]>
   const usersAwaited = await fetchUsers(); // User[]
