@@ -1,5 +1,6 @@
-type Student = ReturnType<typeof createStudent>;
-function createStudent(name: string, age: number, email: string) {
-  return { name, age, email };
+function createCar(horsepower: number, isConvertible: boolean, make: string) {
+  return { horsepower, isConvertible, make } 
 }
-console.log(typeof createStudent);
+
+type Car = ReturnType<typeof createCar>;
+type CarParams = Parameters<typeof createCar>;
