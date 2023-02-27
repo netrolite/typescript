@@ -10,7 +10,6 @@ interface IList {
 }
 
 export default class List implements IList {
-  static listItemsNode = document.querySelector("#listItems") as HTMLUListElement;
   constructor(
     private _list: ListItem[]
   ) {}
@@ -24,7 +23,17 @@ export default class List implements IList {
   
   load() {
     const listItemsNode = document.querySelector("#listItems") as HTMLUListElement;
-    listItemsNode.innerHTML = "test";
+    let listItemsHTML = "";
+    this.list.forEach(listItem => {
+      listItemsHTML += `
+        <li class="item">
+          <input type="checkbox" ${listItem.checked ? "checked" : ""} id="${listItem.id}">
+          <label for="2">${listItem.description}</label>
+          <button class="button">X</button>
+        </li>
+      `
+    })
+    listItemsNode.innerHTML = listItemsHTML;
   }
 
   save(): void {
