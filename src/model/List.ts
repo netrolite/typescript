@@ -10,9 +10,13 @@ interface IList {
 }
 
 export default class List implements IList {
-  constructor(
-    private _list: ListItem[]
-  ) {}
+  private static instance: List;
+  private constructor(private _list: ListItem[] = []) {}
+
+  static getInstance() {
+    if (!List.instance) List.instance = new List();
+    return List.instance;
+  }
 
   get list() {
     return this._list
@@ -45,10 +49,10 @@ export default class List implements IList {
   }
 
   addItem(item: ListItem): void {
-    
+    console.log(item);
   }
 
   removeItem(id: string): void {
-    
+    console.log(id);
   }
 }

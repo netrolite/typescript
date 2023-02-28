@@ -10,7 +10,7 @@ for (let i = 0; i < 10; i++) {
   listItems.push(listItem);
 }
 
-const list = new List(listItems);
+const list = List.getInstance();
 console.log(list);
 
 list.load();
