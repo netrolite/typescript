@@ -11,21 +11,26 @@ interface IList {
 
 export default class List implements IList {
   private static instance: List;
-  private constructor(private _list: ListItem[] = []) {}
+  private constructor() {}
 
   static getInstance() {
     if (!List.instance) List.instance = new List();
     return List.instance;
   }
 
-  get list() {
-    return this._list
-  }
-  set list(val: ListItem[]) {
-    this._list = val
+
+
+  get list(): ListItem[] {
+    const val = localStorage.getItem("listItems");
+    if (val) {
+      const parsed = JSON.parse(val);
+      if (Array.isArray(parsed)) return parsed;
+    }
+    return [];
   }
   
   load() {
+    throw new Error("hello from load()")
     const listItemsNode = document.querySelector("#listItems") as HTMLUListElement;
     let listItemsHTML = "";
     this.list.forEach(listItem => {
@@ -40,19 +45,15 @@ export default class List implements IList {
     listItemsNode.innerHTML = listItemsHTML;
   }
 
-  save(): void {
-    
-  }
-
   clearList(): void {
-    
+    localStorage.setItem("listItems", JSON.stringify([]));
   }
 
   addItem(item: ListItem): void {
-    console.log(item);
+    this.list.push(item);
   }
 
   removeItem(id: string): void {
-    console.log(id);
+    
   }
 }
